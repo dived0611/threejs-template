@@ -1,12 +1,16 @@
 import * as THREE from 'three/webgpu';
 import {Experience} from '../Experience.js';
+import {ChadeCafe} from './ChadeCafe.js';
+import {Environment} from './Environment.js';
 export class World {
     constructor() {
         this.experience = Experience.getinstance();
-        const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        const cube = new THREE.Mesh( geometry, material );
-        this.experience.scene.add( cube );
+       this.experience.resources.on('ready', () => {
+        this.chadcafe = new ChadeCafe();
+        this.environment = new Environment();
+       })
+
+
         this.init();
     }
     init() {
